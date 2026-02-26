@@ -1,3 +1,7 @@
+import os
+from fastapi import Request, Response
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
+from slowapi.middleware import SlowAPIMiddleware
 from fastapi import FastAPI, Depends, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter
@@ -18,6 +22,12 @@ from .security_logger import logger
 # Initialize App
 # -----------------------------
 app = FastAPI()
+FRONTEND_URL = os.getenv("https://secure-web-application-architecture.vercel.app/")
+
+if not FRONTEND_URL:
+    raise ValueError("FRONTEND_URL not set")
+
+app.add_middleware(SlowAPIMiddleware)
 
 limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
@@ -32,11 +42,24 @@ def rate_limit_handler(request: Request, exc: RateLimitExceeded):
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://secure-web-application-architecture.vercel.app/"],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Authorization", "Content-Type"],
 )
+if os.getenv("ENVIRONMENT") == "production":
+    app.add_middleware(HTTPSRedirectMiddleware)
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response: Response = await call_next(request)
+
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Content-Security-Policy"] = "default-src 'self'"
+
+    return response
 
 # Create SQLAlchemy tables
 Base.metadata.create_all(bind=engine)
@@ -167,8 +190,8 @@ def login(
 @app.post("/analyze")
 @limiter.limit("10/minute")
 def analyze(
-    request: Request,                     # ✅ FIXED
-    message: MessageRequest,              # ✅ FIXED
+    request: Request,                     
+    message: MessageRequest,              
     current_user: str = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
@@ -216,13 +239,13 @@ def get_all_users(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_admin)
 ):
-    logger.info(f"Admin {current_user.username} accessed all users")  # ✅ FIXED
+    logger.info(f"Admin {current_user.username} accessed all users")  
     return db.query(User).all()
 
 @app.get("/admin/offenses")
 @limiter.limit("15/minute")
 def get_all_offenses(
-    request: Request,                     # ✅ FIXED
+    request: Request,                     
     admin: User = Depends(get_current_admin),
     db: Session = Depends(get_db)
 ):
@@ -231,7 +254,7 @@ def get_all_offenses(
 @app.get("/admin/cases")
 @limiter.limit("15/minute")
 def get_all_cases(
-    request: Request,                     # ✅ FIXED
+    request: Request,                     
     admin: User = Depends(get_current_admin),
     db: Session = Depends(get_db)
 ):
@@ -240,7 +263,7 @@ def get_all_cases(
 @app.get("/admin/summary")
 @limiter.limit("15/minute")
 def admin_summary(
-    request: Request,                     # ✅ FIXED
+    request: Request,                     
     admin: User = Depends(get_current_admin),
     db: Session = Depends(get_db)
 ):
