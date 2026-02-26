@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🛡 Cyberbullying Detection & Escalation System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 3D Globe -->
+    <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-globe"></script>
+
+    <!-- Particles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="globeContainer" class="hidden"></div>
+<div id="tsparticles"></div>
+
+<button id="adminBtn" style="display:none; margin-right:20px;">Admin Dashboard 🛠</button>
+<button id="themeToggle" class="theme-btn">🌙</button>
+
+<div class="container">
+
+    <!-- LANDING -->
+    <div id="landingSection">
+        <h1>🛡 Cyberbullying Detection</h1>
+        <h3>AI Powered Escalation System</h3>
+        <button onclick="showRegister()">Get Started 🚀</button>
+        <button onclick="showLogin()">Login 🔐</button>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerSection" class="card hidden">
+        <h2>Create Account 👤</h2>
+
+        <input type="text" id="regUsername" placeholder="Gmail address 📧">
+
+        <div class="password-wrapper">
+            <input type="password" id="regPassword"
+                   placeholder="Password 🔒"
+                   oninput="checkStrength()">
+            <span class="eye" onclick="togglePassword('regPassword', this)">👁</span>
+        </div>
+
+        <div class="strength-container">
+            <div id="strengthBar" class="strength-bar"></div>
+        </div>
+
+        <div class="rules">
+            <p id="rule-length">❌ At least 8 characters</p>
+            <p id="rule-upper">❌ At least one uppercase letter</p>
+            <p id="rule-lower">❌ At least one lowercase letter</p>
+            <p id="rule-number">❌ At least one number</p>
+            <p id="rule-special">❌ At least one special character</p>
+        </div>
+
+        <button onclick="register()">Register ✅</button>
+        <p class="link" onclick="showLogin()">Already have account? Login</p>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginSection" class="card hidden">
+        <h2>Login 🔐</h2>
+
+        <input type="text" id="loginUsername" placeholder="Gmail address 📧">
+
+        <div class="password-wrapper">
+            <input type="password" id="loginPassword" placeholder="Password 🔒">
+            <span class="eye" onclick="togglePassword('loginPassword', this)">👁</span>
+        </div>
+
+        <button onclick="login()">Login 🚀</button>
+        <p class="link" onclick="showRegister()">Create account</p>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboardSection" class="hidden">
+        <h2>Dashboard 🛡</h2>
+
+        <textarea id="message" placeholder="Type message to analyze... 💬"></textarea>
+        <button onclick="analyzeMessage()">Analyze 🚨</button>
+        <button onclick="logout()">Logout ❌</button>
+
+        <div id="result" class="hidden">
+            <h3>Analysis Result</h3>
+
+            <div class="risk-meter-container">
+                <div id="riskMeter" class="risk-meter"></div>
+            </div>
+
+            <p><b>Risk:</b> <span id="risk"></span></p>
+            <p><b>Score:</b> <span id="score"></span></p>
+            <p><b>Action:</b> <span id="action"></span></p>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

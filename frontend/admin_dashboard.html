@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h2>Admin Dashboard</h2>
+
+    <button onclick="loadSummary()">Load Summary</button>
+
+    <div id="summary"></div>
+
+<script>
+async function loadSummary() {
+
+    const token = prompt("Paste your admin access token:");
+
+    const response = await fetch("http://127.0.0.1:8000/admin/summary", {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    });
+
+    const data = await response.json();
+
+    document.getElementById("summary").innerHTML =
+        "<p>Total Users: " + data.total_users + "</p>" +
+        "<p>Total Cases: " + data.total_cases + "</p>" +
+        "<p>Total Offenses: " + data.total_offenses + "</p>" +
+        "<p>Active Lockouts: " + data.active_lockouts + "</p>";
+}
+</script>
+
+</body>
+</html>

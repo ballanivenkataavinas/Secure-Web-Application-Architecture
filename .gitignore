@@ -1,0 +1,5 @@
+.env
+backend/venv/
+backend/__pycache__/
+*.pyc
+security.log
