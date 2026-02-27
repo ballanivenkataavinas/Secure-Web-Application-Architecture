@@ -7,7 +7,7 @@ from datetime import timezone
 from sqlalchemy.orm import Session
 from app.models import Offense
 from .ml_engine import analyze_ml
-from escalation import time_based_escalation, repeat_escalation
+from .escalation import time_based_escalation, repeat_escalation
 
 
 
