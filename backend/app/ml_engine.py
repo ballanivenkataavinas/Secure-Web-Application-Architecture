@@ -6,7 +6,7 @@ from functools import lru_cache
 def get_toxic_classifier():
     return pipeline(
         "text-classification",
-        model="unitary/toxic-bert",
+        model="cardiffnlp/twitter-roberta-base-offensive",
         return_all_scores=True
     )
 
