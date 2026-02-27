@@ -1,4 +1,4 @@
-const API = "secure-web-application-architecture-production.up.railway.app";
+const API = "https://secure-web-application-architecture-production.up.railway.app/login";
 
 /* =========================
    PARTICLES (ALWAYS WORKING)
