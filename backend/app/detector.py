@@ -6,6 +6,9 @@ from datetime import timezone
 
 from sqlalchemy.orm import Session
 from app.models import Offense
+from ml_engine import analyze_ml
+from escalation import time_based_escalation, repeat_escalation
+
 
 
 # -----------------------------
@@ -212,3 +215,39 @@ class CyberbullyingSystem:
             db.add(offense)
 
         db.commit()
+
+def hybrid_detect(text: str, keyword_score: int, user_id: str):
+
+    # 1️⃣ ML Analysis
+    ml_score, categories, sentiment_label = analyze_ml(text)
+
+    # Normalize ML score (0–1 range → scale)
+    ml_scaled = ml_score * 5
+
+    # 2️⃣ Combine rule + ML
+    final_score = (keyword_score * 2) + ml_scaled
+
+    # 3️⃣ Sentiment adjustment
+    if sentiment_label == "NEGATIVE":
+        final_score += 1
+
+    if sentiment_label == "POSITIVE" and keyword_score == 0:
+        final_score -= 1
+
+    # 4️⃣ Time escalation
+    final_score = time_based_escalation(final_score)
+
+    # 5️⃣ Repeat escalation
+    final_score = repeat_escalation(user_id, final_score)
+
+    return round(max(final_score, 0), 2), categories
+
+def classify(score):
+    if score >= 10:
+        return "Severe"
+    elif score >= 6:
+        return "Moderate"
+    elif score >= 2:
+        return "Mild"
+    else:
+        return "Clean"

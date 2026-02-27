@@ -17,6 +17,7 @@ from datetime import datetime, timedelta
 from .schemas import MessageRequest
 from .security_logger import logger
 from dotenv import load_dotenv
+from ml_engine import get_toxic_classifier, get_sentiment_classifier
 # -----------------------------
 # Initialize App
 # -----------------------------
@@ -324,3 +325,10 @@ def get_admin_docs(admin: User = Depends(get_current_admin)):
         openapi_url="/admin/openapi.json",
         title="Admin API Docs"
     )
+
+@app.on_event("startup")
+def load_models():
+    print("Loading ML models...")
+    get_toxic_classifier()
+    get_sentiment_classifier()
+    print("Models loaded successfully.")
