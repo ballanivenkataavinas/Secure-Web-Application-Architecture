@@ -1,21 +1,15 @@
-from transformers import pipeline
-from functools import lru_cache
+import os
+import requests
 
-# Load once only (prevents crash & reload issues)
-@lru_cache()
-def get_toxic_classifier():
-    return pipeline(
-        "text-classification",
-        model="cardiffnlp/twitter-roberta-base-offensive",
-        return_all_scores=True
-    )
+HF_API_TOKEN = os.getenv("HF_API_TOKEN")
 
-@lru_cache()
-def get_sentiment_classifier():
-    return pipeline("sentiment-analysis")
+API_URL = "https://api-inference.huggingface.co/models/unitary/toxic-bert"
+
+headers = {
+    "Authorization": f"Bearer {HF_API_TOKEN}"
+}
 
 
-# CATEGORY WEIGHTING (Production Smart Logic)
 CATEGORY_WEIGHTS = {
     "threat": 3,
     "identity_hate": 3,
@@ -27,11 +21,15 @@ CATEGORY_WEIGHTS = {
 
 
 def analyze_ml(text: str):
-    classifier = get_toxic_classifier()
-    sentiment_model = get_sentiment_classifier()
 
-    results = classifier(text)[0]
-    sentiment = sentiment_model(text)[0]
+    payload = {"inputs": text}
+
+    response = requests.post(API_URL, headers=headers, json=payload)
+
+    if response.status_code != 200:
+        return 0, {}, "UNKNOWN"
+
+    results = response.json()[0]
 
     weighted_score = 0
     category_breakdown = {}
@@ -45,6 +43,7 @@ def analyze_ml(text: str):
         if label in CATEGORY_WEIGHTS:
             weighted_score += score * CATEGORY_WEIGHTS[label]
 
-    sentiment_label = sentiment["label"]
+    # Simple sentiment fallback logic
+    sentiment_label = "NEGATIVE" if weighted_score > 1 else "POSITIVE"
 
     return weighted_score, category_breakdown, sentiment_label
