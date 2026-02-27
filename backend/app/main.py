@@ -1,6 +1,5 @@
 import os
 from fastapi import Request, Response
-from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 from slowapi.middleware import SlowAPIMiddleware
 from fastapi import FastAPI, Depends, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -87,9 +86,7 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type"],
 )
 
-if os.getenv("ENVIRONMENT") == "production":
-    app.add_middleware(HTTPSRedirectMiddleware)
-
+    
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next):
     response: Response = await call_next(request)

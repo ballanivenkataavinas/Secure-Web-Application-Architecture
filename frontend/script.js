@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000";
+const API = "secure-web-application-architecture-production.up.railway.app";
 
 /* =========================
    PARTICLES (ALWAYS WORKING)
