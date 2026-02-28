@@ -21,7 +21,10 @@ class AdvancedToxicDetector:
         self._load_extended_keywords()
 
     def _load_extended_keywords(self):
+
         keywords = [
+
+            # ---------------- ENGLISH (20+) ----------------
             ("stupid", "english", 1),
             ("idiot", "english", 1),
             ("moron", "english", 1),
@@ -40,6 +43,48 @@ class AdvancedToxicDetector:
             ("pathetic", "english", 2),
             ("hate you", "english", 3),
             ("failure", "english", 1),
+            ("shut up", "english", 1),
+            ("useless", "english", 2),
+            ("garbage", "english", 2),
+            ("freak", "english", 2),
+            ("go to hell", "english", 3),
+            ("i will kill you", "english", 3),
+            ("drop dead", "english", 3),
+            ("end your life", "english", 3),
+
+            # ---------------- HINDI (10) ----------------
+            ("bewakoof", "hindi", 1),
+            ("pagal", "hindi", 1),
+            ("nikamma", "hindi", 2),
+            ("ghatiya", "hindi", 2),
+            ("chup ho ja", "hindi", 1),
+            ("tum bekaar ho", "hindi", 2),
+            ("tumse na ho payega", "hindi", 2),
+            ("ganda insaan", "hindi", 2),
+            ("mar ja", "hindi", 3),
+            ("tum useless ho", "hindi", 2),
+            ("ja ke mar", "hindi", 3),
+            ("khud ko maar", "hindi", 3),
+            ("zinda mat reh", "hindi", 3),
+            ("tumhe maar dunga", "hindi", 3),
+            ("tumhari koi value nahi", "hindi", 3),
+
+            # ---------------- SPANISH (10) ----------------
+            ("idiota", "spanish", 1),
+            ("estupido", "spanish", 1),
+            ("tonto", "spanish", 1),
+            ("feo", "spanish", 2),
+            ("asqueroso", "spanish", 2),
+            ("callate", "spanish", 1),
+            ("nadie te quiere", "spanish", 3),
+            ("eres inutil", "spanish", 2),
+            ("muérete", "spanish", 3),
+            ("basura", "spanish", 2),
+            ("vete al infierno", "spanish", 3),
+            ("te voy a matar", "spanish", 3),
+            ("acaba con tu vida", "spanish", 3),
+            ("no mereces vivir", "spanish", 3),
+            ("nadie te necesita", "spanish", 3),
         ]
 
         for word, language, severity in keywords:
