@@ -21,7 +21,10 @@ from dotenv import load_dotenv
 # -----------------------------
 # Initialize App
 # -----------------------------
-app = FastAPI()
+app = FastAPI(
+    title="Cyberbully AI API",
+    version="1.0.0"
+)
 
 load_dotenv()
 FRONTEND_URL = os.getenv("FRONTEND_URL")
