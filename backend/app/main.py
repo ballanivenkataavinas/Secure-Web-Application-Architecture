@@ -223,27 +223,21 @@ def analyze(request: Request, message: MessageRequest,
     user_id = current_user
     result = system.analyze_message(message.text, user_id, db)
 
-    if result["risk_level"] == "HIGH":
-        logger.warning(f"HIGH risk message detected from {user_id}")
+    # Trigger warnings for severe risk
+if result["risk_level"] == "severe":
 
-    user = db.query(User).filter(User.username == user_id).first()
-    warning_message = None
+    logger.warning(f"SEVERE risk message detected from {user_id}")
 
-    if result["risk_level"] == "HIGH":
+    user.warning_count += 1
+    warning_message = f"You have {user.warning_count} warning(s). Further violations may result in ban."
 
-        user.warning_count += 1
-        warning_message = f"You have {user.warning_count} warning(s). Further violations may result in ban."
+    # Auto ban after 3 severe violations
+    if user.warning_count >= 3:
+        user.ban_until = datetime.utcnow() + timedelta(hours=48)
+        logger.warning(f"User {user.username} banned until {user.ban_until}")
+        warning_message = f"You are banned until {user.ban_until.strftime('%d %b %Y %I:%M %p')}"
+        user.warning_count = 0
 
-        if user.warning_count >= 3:
-            user.ban_until = datetime.utcnow() + timedelta(hours=48)
-            logger.warning(f"User {user.username} banned until {user.ban_until}")
-            warning_message = f"You are banned until {user.ban_until.strftime('%d %b %Y %I:%M %p')}"
-            user.warning_count = 0
-
-        db.commit()
-
-    case = Case(user_id=user_id, text=message.text, severity=result["risk_level"])
-    db.add(case)
     db.commit()
 
     response = result
