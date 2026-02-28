@@ -21,9 +21,7 @@ from dotenv import load_dotenv
 # -----------------------------
 # Initialize App
 # -----------------------------
-app = FastAPI(docs_url=None,
-    redoc_url=None,
-    openapi_url=None)
+app = FastAPI()
 
 load_dotenv()
 FRONTEND_URL = os.getenv("FRONTEND_URL")
@@ -307,21 +305,5 @@ from fastapi.openapi.docs import get_swagger_ui_html
 # Admin Only Swagger Docs
 # -----------------------------
 
-@app.get("/admin/openapi.json", include_in_schema=False)
-def get_admin_openapi(admin: User = Depends(get_current_admin)):
 
-    return get_openapi(
-        title="Secure Web Application API",
-        version="1.0.0",
-        routes=app.routes,
-    )
-
-
-@app.get("/admin/docs", include_in_schema=False)
-def get_admin_docs(admin: User = Depends(get_current_admin)):
-
-    return get_swagger_ui_html(
-        openapi_url="/admin/openapi.json",
-        title="Admin API Docs"
-    )
 
