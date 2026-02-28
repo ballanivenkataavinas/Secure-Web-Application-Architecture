@@ -130,13 +130,19 @@ class CyberbullyingSystem:
                 self.config = json.load(f)
         except:
             self.config = {
-                "severity_thresholds": {"mild": 1, "moderate": 3, "severe": 5},
-                "response_actions": {
-                    "mild": "warning",
-                    "moderate": "temporary_suspension",
-                    "severe": "permanent_ban",
-                },
-            }
+               "severity_thresholds": {
+               "clean": 0,
+               "mild": 1,
+               "moderate": 5,
+               "severe": 10
+        },
+        "response_actions": {
+            "clean": "allow",
+            "mild": "warning",
+            "moderate": "temporary_suspension",
+            "severe": "permanent_ban",
+        },
+    }
 
     def _now(self):
         return datetime.now(timezone.utc)
