@@ -192,7 +192,7 @@ Security areas covered:
 
 - CVE-based dependency scanning
 - Vulnerable package version detection
-- 
+ 
 ## 🛡 Production Hardening Measures
 
 - Secrets stored in environment variables
@@ -217,4 +217,4 @@ Major OWASP Top 10 risks (A01–A07) are mitigated through architectural and cod
 - Environment-based secret management
 - Static (SAST), Dependency (SCA), and Dynamic (DAST) security testing
 
-The system follows defense-in-depth and least privilege principles, resulting in a low-to-moderate overall risk profile appropriate for secure portfolio deployment.
+The system follows defense-in-depth and least privilege principles, resulting in a low-to-moderate risk 
