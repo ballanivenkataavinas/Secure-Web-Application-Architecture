@@ -1,9 +1,8 @@
-# 🔐 Cyberbullying Detection & Escalation System  
-## Security Architecture & Validation Report
+## 🔐Security Architecture & Validation Report
 
 # 🏗 1️⃣ System Overview
 
-The Cyberbullying Detection & Escalation System is a secure web-based application designed using layered security architecture and defense-in-depth principles.
+This is a secure web-based application designed using layered security architecture and defense-in-depth principles.
 
 ## Architecture Components
 
