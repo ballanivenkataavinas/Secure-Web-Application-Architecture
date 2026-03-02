@@ -21,18 +21,16 @@ Authentication: JSON Web Token (JWT)
 - Cross-Origin Resource Sharing (CORS) Control  
 - Behavioral Escalation & Auto-Ban System  
 - Audit Logging & Security Monitoring
-- 
+  
 ## 🛡 Security Validation
 
 - Static Application Security Testing (SAST) – Bandit  
 - Software Composition Analysis (SCA) – pip-audit  
-- Dynamic Application Security Testing (DAST) – OWASP ZAP  
-
+- Dynamic Application Security Testing (DAST) – OWASP ZAP
+  
 No critical vulnerabilities identified.
 
 See **SECURITY.md** for threat model and detailed testing documentation.
 
-
 ## 🎯 Security Principles
-
 Defense in Depth • Least Privilege • Secure Configuration • Server-Side Validation • Abuse Mitigation
