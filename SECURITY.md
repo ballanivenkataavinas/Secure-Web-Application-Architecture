@@ -50,7 +50,7 @@ The system processes authentication, text moderation, behavioral enforcement, an
 - Brute-force attackers
 - Privilege escalation attackers
 - Automated bots
-- 
+  
 ## STRIDE-Based Risk Analysis
 
 ### 🛑 Spoofing (Identity Attacks)
