@@ -9,8 +9,6 @@ Backend: FastAPI
 Database: PostgreSQL  
 Authentication: JSON Web Token (JWT)  
 
-Deployed with HTTPS and environment-based secret management.
-
 ## 🚀 Core Security Features
 
 - JSON Web Token (JWT) Authentication  
