@@ -6,8 +6,7 @@ Security-focused full-stack web application implementing a Cyberbullying Detecti
 
 Frontend: HTML, CSS, JavaScript  
 Backend: FastAPI  
-Database: PostgreSQL  
-Authentication: JSON Web Token (JWT)  
+Database: PostgreSQL
 
 ## 🚀 Core Security Features
 
