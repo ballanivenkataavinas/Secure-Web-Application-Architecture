@@ -8,7 +8,7 @@ Frontend: HTML, CSS, JavaScript
 Backend: FastAPI  
 Database: PostgreSQL
 
-## 🚀 Core Security Features
+##  Core Security Features
 
 - JSON Web Token (JWT) Authentication  
 - Role-Based Access Control (RBAC)  
@@ -21,7 +21,7 @@ Database: PostgreSQL
 - Behavioral Escalation & Auto-Ban System  
 - Audit Logging & Security Monitoring
   
-## 🛡 Security Validation
+##  Security Validation
 
 - Static Application Security Testing (SAST) – Bandit  
 - Software Composition Analysis (SCA) – pip-audit  
@@ -31,5 +31,5 @@ No critical vulnerabilities identified.
 
 See **SECURITY.md** for threat model and detailed testing documentation.
 
-## 🎯 Security Principles
+##  Security Principles
 Defense in Depth • Least Privilege • Secure Configuration • Server-Side Validation • Abuse Mitigation
