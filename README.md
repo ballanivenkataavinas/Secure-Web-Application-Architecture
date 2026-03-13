@@ -1,8 +1,8 @@
-# 🔐 Secure-Web-Application-Architecture
+#  Secure-Web-Application-Architecture
 
 Security-focused full-stack web application implementing a Cyberbullying Detection and Behavioral Escalation System with abuse prevention mechanisms, layered defense architecture, secure authentication, authorization controls, and structured security validation aligned with OWASP risk mitigation principles.
 
-## 🏗 Architecture
+##  Architecture
 
 Frontend: HTML, CSS, JavaScript  
 Backend: FastAPI  
