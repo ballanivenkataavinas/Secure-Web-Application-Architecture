@@ -1,6 +1,6 @@
-## 🔐Security Architecture & Validation Report
+## Security Architecture & Validation Report
 
-# 🏗 1️⃣ System Overview
+# 1️ System Overview
 
 This is a secure web-based application designed using layered security architecture and defense-in-depth principles.
 
@@ -32,7 +32,7 @@ This is a secure web-based application designed using layered security architect
 
 The system processes authentication, text moderation, behavioral enforcement, and administrative review while enforcing strict access control and abuse prevention mechanisms.
 
-# 🧠 2️⃣ Threat Model – Cyberbullying Detection & Escalation System
+# 2️ Threat Model – Cyberbullying Detection & Escalation System
 
 ## Assets Protected
 
@@ -53,7 +53,7 @@ The system processes authentication, text moderation, behavioral enforcement, an
   
 ## STRIDE-Based Risk Analysis
 
-### 🛑 Spoofing (Identity Attacks)
+### Spoofing (Identity Attacks)
 
 Mitigations:
 - JWT signature validation (HS256)
@@ -64,7 +64,7 @@ Mitigations:
 
 Risk Level: Low
 
-### 🛑 Tampering
+### Tampering
 
 Mitigations:
 - SQLAlchemy ORM (no raw SQL)
@@ -74,7 +74,7 @@ Mitigations:
 
 Risk Level: Low
 
-### 🛑 Repudiation
+###  Repudiation
 
 Mitigations:
 - Failed login logging
@@ -84,7 +84,7 @@ Mitigations:
 
 Risk Level: Low
 
-### 🛑 Information Disclosure
+### Information Disclosure
 
 Mitigations:
 - Secrets stored in environment variables
@@ -95,7 +95,7 @@ Mitigations:
 
 Risk Level: Low
 
-### 🛑 Denial of Service (DoS)
+###  Denial of Service (DoS)
 
 Mitigations:
 - Rate limiting via SlowAPI
@@ -105,7 +105,7 @@ Mitigations:
 
 Risk Level: Medium 
 
-### 🛑 Elevation of Privilege
+###  Elevation of Privilege
 
 Mitigations:
 - Role-Based Access Control (RBAC)
@@ -118,7 +118,7 @@ Overall System Risk Rating: **Low–Medium**
 
 The system implements defense-in-depth and least privilege principles across all layers.
 
-# 🌐 3️⃣ Dynamic Security Testing (DAST)
+#  3️ Dynamic Security Testing (DAST)
 
 ## Tool Used: OWASP ZAP
 
@@ -155,11 +155,11 @@ Conclusion:
 
 The application shows no critical dynamic security vulnerabilities under automated DAST testing.
 
-# 🔐 4️⃣ Security Testing & Hardening
+#  4️ Security Testing & Hardening
 
 The project incorporates structured security validation aligned with secure development lifecycle principles.
 
-## 🧪 Static Application Security Testing (SAST)
+##  Static Application Security Testing (SAST)
 
 Tool Used: Bandit
 
@@ -179,7 +179,7 @@ Security areas covered:
 - Injection risks
 - Insecure cryptographic patterns
 
-## 📦 Software Composition Analysis (SCA)
+##  Software Composition Analysis (SCA)
 
 Tool Used: pip-audit
 
@@ -193,7 +193,7 @@ Security areas covered:
 - CVE-based dependency scanning
 - Vulnerable package version detection
  
-## 🛡 Production Hardening Measures
+##  Production Hardening Measures
 
 - Secrets stored in environment variables
 - JWT_SECRET enforced at application startup
@@ -203,7 +203,7 @@ Security areas covered:
 - Role-based route protection
 - Behavioral escalation enforcement
 
-# 🏁 Final Security Posture Statement
+# Final Security Posture Statement
 
 The system implements layered security controls across authentication, authorization, abuse prevention, configuration management, and logging.
 
